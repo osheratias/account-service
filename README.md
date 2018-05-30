@@ -30,7 +30,17 @@ docker run --name service1-app -e DATABASE_SERVER='<my-server>' -e DATABASE_PORT
 ```
 
 #### Swagger UI
-Once the app is running open: 
+The app exposes swagger-ui at: 
 ```
 http://<host>:8080/swagger-ui.html
+```
+
+#### Prometheus and health 
+The app exposes prometheus endpoint at:
+```
+http://<host>:8080/actuator/prometheus
+```
+The app exposes health status endpoint at:
+```
+http://<host>:8080/actuator/health
 ```
