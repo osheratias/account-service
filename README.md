@@ -1,7 +1,11 @@
-## Sample micro service
+## Account-Service - Sample REST API micro service
 
-### Building the image
-Set the docker.repo property in pom.xml then run:
+### Using the project
+Set the docker.repo property in pom.xml.
+
+If you plan to use the included jenkins pipeline take a look at the pipeline
+variables and set them up. The pipelines also include deployment to the Openshift platform, 
+choose what is relevant for your project, then run:
 
 ```
 mvn install dockerfile:build -DskipTests
