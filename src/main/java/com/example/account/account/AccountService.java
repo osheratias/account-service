@@ -8,8 +8,8 @@ import java.util.Optional;
 import com.example.account.exception.ResourceNotFoundException;
 
 import com.example.account.transaction.TransactionService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import javax.transaction.Transactional;
 @Service
 public class AccountService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AccountService.class);
+    private static final Logger logger = LogManager.getLogger(AccountService.class);
 
     @Autowired
     private AccountRepository accountRepository;

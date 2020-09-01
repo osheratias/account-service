@@ -1,0 +1,11 @@
+${AnsiColor.BRIGHT_BLUE}      ___    ${AnsiColor.BRIGHT_GREEN}     ___         ___         ___         ___         ___      ___         ___
+${AnsiColor.BRIGHT_BLUE}     /\  \   ${AnsiColor.BRIGHT_GREEN}    /\  \       /\  \       /\  \       /\__\       /\__\    /\  \       /\  \
+${AnsiColor.BRIGHT_BLUE}    /::\  \  ${AnsiColor.BRIGHT_GREEN}   /::\  \     /::\  \     /::\  \     /:/  /      /::|  |   \:\  \     /::\  \
+${AnsiColor.BRIGHT_BLUE}   /:/\:\  \ ${AnsiColor.BRIGHT_GREEN}  /:/\:\  \   /:/\:\  \   /:/\:\  \   /:/  /      /:|:|  |    \:\  \   /:/\ \  \
+${AnsiColor.BRIGHT_BLUE}  /::\~\:\  \${AnsiColor.BRIGHT_GREEN} /:/  \:\  \ /:/  \:\  \ /:/  \:\  \ /:/  /  ___ /:/|:|  |__  /::\  \ _\:\~\ \  \
+${AnsiColor.BRIGHT_BLUE} /:/\:\ \:\__${AnsiColor.BRIGHT_GREEN}/:/__/ \:\__/:/__/ \:\__/:/__/ \:\__/:/__/  /\__/:/ |:| /\__\/:/\:\__/\ \:\ \ \__\
+${AnsiColor.BRIGHT_BLUE} \/__\:\/:/  ${AnsiColor.BRIGHT_GREEN}\:\  \  \/__\:\  \  \/__\:\  \ /:/  \:\  \ /:/  \/__|:|/:/  /:/  \/__\:\ \:\ \/__/
+${AnsiColor.BRIGHT_BLUE}      \::/  /${AnsiColor.BRIGHT_GREEN} \:\  \      \:\  \      \:\  /:/  / \:\  /:/  /    |:/:/  /:/  /     \:\ \:\__\
+${AnsiColor.BRIGHT_BLUE}      /:/  / ${AnsiColor.BRIGHT_GREEN}  \:\  \      \:\  \      \:\/:/  /   \:\/:/  /     |::/  /\/__/       \:\/:/  /
+${AnsiColor.BRIGHT_BLUE}     /:/  /  ${AnsiColor.BRIGHT_GREEN}   \:\__\      \:\__\      \::/  /     \::/  /      /:/  /              \::/  /
+${AnsiColor.BRIGHT_BLUE}     \/__/   ${AnsiColor.BRIGHT_GREEN}    \/__/       \/__/       \/__/       \/__/       \/__/                \/__/

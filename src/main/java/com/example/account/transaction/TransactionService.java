@@ -4,8 +4,8 @@ import com.example.account.account.Account;
 import com.example.account.account.AccountService;
 import com.example.account.exception.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class TransactionService {
 
-    private static final Logger logger = LoggerFactory.getLogger(TransactionService.class);
+    private static final Logger logger = LogManager.getLogger(TransactionService.class);
 
     private final ModelMapper modelMapper = new ModelMapper(); // Make it a bean and autowire
 

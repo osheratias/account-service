@@ -3,8 +3,8 @@ package com.example.account.transaction;
 import com.example.account.account.Account;
 import com.example.account.account.AccountService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/accounts")
 public class TransactionController {
 
-    private static final Logger logger = LoggerFactory.getLogger(TransactionController.class);
+    private static final Logger logger = LogManager.getLogger(TransactionController.class);
 
     @Autowired
     private TransactionService transactionService;
