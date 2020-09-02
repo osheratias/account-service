@@ -1,21 +1,45 @@
-<configuration>
-    <appender name="json" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
-            <jsonFormatter
-                    class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
-                <prettyPrint>true</prettyPrint>
-            </jsonFormatter>
-            <timestampFormat>yyyy-MM-dd' 'HH:mm:ss.SSS</timestampFormat>
-            <appendLineSeparator>true</appendLineSeparator>
-        </layout>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="10 seconds">
+
+    <springProperty name="LOGGER_ROOT_APPENDER" source="logger.appender" value="${logger.appender:-logstash}"/>
+    <springProperty name="LOGGER_LEVEL" source="logger.level" value="${logger.level:-INFO}"/>
+    <springProperty name="SPRING_APPLICATION_NAME" source="spring.application.name" value="${spring.application.name:-general}"/>
+
+    <contextName>testContext</contextName>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36} %X{traceId} - %msg%n</pattern>
+        </encoder>
     </appender>
 
-    <Logger name="org.springframework" additivity="false" level="WARN"></Logger>
-    <Logger name="org.hibernate" additivity="false" level="WARN"></Logger>
-    <Logger name="springfox" additivity="false" level="WARN"></Logger>
+    <appender name="logstash" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
 
-    <root level="debug">
-        <appender-ref ref="json"/>
+            <fieldNames>
+                <version>[ignore]</version>
+                <levelValue>[ignore]</levelValue>
+                <level>logLevel</level>
+                <logger>loggerName</logger>
+            </fieldNames>
+            <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+            <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+            <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+            <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+            <customFields>{"application":"${SPRING_APPLICATION_NAME:-general}"}</customFields>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="${LOGGER_LEVEL:-INFO}"/>
+    <logger name="org.apache.http" level="${LOGGER_LEVEL:-INFO}"/>
+
+
+    <root level="${LOGGER_LEVEL:-INFO}" additivity="false">
+        <appender-ref ref="${LOGGER_ROOT_APPENDER:-logstash}"/>
     </root>
+
 
 </configuration>

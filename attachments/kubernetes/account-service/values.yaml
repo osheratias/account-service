@@ -26,12 +26,15 @@ serviceAccount:
 podAnnotations: {}
 
 env:
-  MYSQL_HOST: "haproxy"
-  MYSQL_PORT: "3306"
-  MYSQL_USER: "root"
+  DATABASE_SERVER: "mysql"
+  DATABASE_PORT: "3306"
+  DATABASE_NAME: "accounts"
+  DATABASE_USER: "root"
+  DATABASE_PASSWORD: "hr56yrh34f"
+  LOGGER_ROOT_APPENDER: "logstash"
 
 podSecurityContext: {}
-  # fsGroup: 2000
+# fsGroup: 2000
 
 securityContext: {}
   # capabilities:
@@ -39,7 +42,7 @@ securityContext: {}
   #   - ALL
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
-  # runAsUser: 1000
+# runAsUser: 1000
 
 service:
   type: ClusterIP
@@ -48,17 +51,37 @@ service:
     port: 8080
 
 ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "5"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/connection-proxy-header: "keep-alive"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-hash: "sha1"
+    nginx.ingress.kubernetes.io/limit-connections: "100"
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    nginx.ingress.kubernetes.io/limit-rate: "100"
+    nginx.ingress.kubernetes.io/enable-access-log: "false"
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "false"
+    nginx.ingress.kubernetes.io/enable-opentracing: "false"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      more_set_headers "server: saffer";
+      more_set_headers "X-Content-Type-Options: nosniff";
+      more_set_headers "X-Frame-Options: DENY";
+      more_set_headers "X-Xss-Protection: 1";
   hosts:
-    - host: chart-example.local
-      paths: []
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    - host: accounts.poalim.io
+      paths: ["/"]
+  tls:
+    - secretName: accounts-poalim-io-tls
+      hosts:
+        - accounts.poalim.io
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -70,7 +93,7 @@ resources: {}
   #   memory: 128Mi
   # requests:
   #   cpu: 100m
-  #   memory: 128Mi
+#   memory: 128Mi
 
 autoscaling:
   enabled: false
