@@ -2,9 +2,8 @@ package com.example.account.account;
 
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/accounts")
 public class AccountController {
 
-    private static final Logger logger = LogManager.getLogger(AccountController.class);
+    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
 
     @Autowired
     private AccountService accountService;

@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+  labels:
+    app: account-service
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: account-service
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service
+  labels:
+    app: account-service
+spec:
+  selector:
+    matchLabels:
+      app: account-service
+      tier: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: account-service
+        tier: frontend
+    spec:
+      containers:
+        - image: 510385942867.dkr.ecr.eu-central-1.amazonaws.com/account-service:1.0.0
+          name: account-service
+          env:
+            - name: DATABASE_SERVER
+              value: account-service-mysql
+            - name: DATABASE_PORT
+              value: "3306"
+            - name: DATABASE_NAME
+              value: accounts
+            - name: DATABASE_USER
+              value: popo
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: password
+          ports:
+            - containerPort: 80
+              name: wordpress
